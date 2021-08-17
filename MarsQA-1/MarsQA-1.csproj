@@ -164,6 +164,9 @@
     <Compile Include="SpecflowPages\Helpers\ConstantHelpers.cs" />
     <Compile Include="SpecflowPages\Helpers\Driver.cs" />
     <Compile Include="SpecflowPages\Helpers\ExcelLibHelper.cs" />
+    <Compile Include="SpecflowPages\Pages\Certificate.cs" />
+    <Compile Include="SpecflowPages\Pages\Education.cs" />
+    <Compile Include="SpecflowPages\Pages\Language.cs" />
     <Compile Include="SpecflowPages\Pages\SignIn.cs" />
     <Compile Include="SpecflowPages\Utils\Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -180,7 +183,6 @@
     <None Include="Feature\Language.feature" />
     <None Include="Feature\Login.feature" />
     <None Include="Feature\Skills.feature" />
-    <None Include="SpecflowTests\Data\Data.xlsx" />
     <None Include="packages.config" />
     <None Include="SpecflowTests\Data\Mars.xlsx" />
   </ItemGroup>

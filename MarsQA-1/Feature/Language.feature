@@ -5,12 +5,12 @@
 Scenario Outline: 1 Add Languages to your profile
 	Given I am on Profile Page
 	And I click on Add New Button in Languages Tab
-	And I add <Language> in textbox
+	And I add <language> in textbox
 	And I choose a <Level> for language from dropdown list
 	When I click on Add Button
 	Then The language should be added to my profile
 	Examples:
-	| Language | Level          |
+	| language | Level          |
 	| English  | Conversational |
 	| Hindi    | Fluent         |
 	| French   | Basic          |
