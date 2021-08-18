@@ -3,6 +3,7 @@
 
 @mytag
 Scenario Outline: 1 Add Languages to your profile
+	Given I login to the website  
 	Given I am on Profile Page
 	And I click on Add New Button in Languages Tab
 	And I add <language> in textbox
@@ -21,6 +22,7 @@ Scenario Outline: 1 Add Languages to your profile
 
 	@mytag1
 	Scenario: 2 Edit the Language added earlier
+	Given I login to the website  
 	Given I am on Profile Page
 	And I click on Edit Button next to language I want to edit
 	And I replace old input in textbox with new language
@@ -29,7 +31,9 @@ Scenario Outline: 1 Add Languages to your profile
 	Then the language should be updated
 
 	@mytag2
+	  
 	Scenario: 3 Delete the language added earlier
+	Given I login to the website
 	Given I am on Profile Page
 	When I click on cross sign next to the language I want to delete
 	Then the language should be deleted

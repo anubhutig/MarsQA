@@ -1,4 +1,5 @@
 ﻿using MarsQA_1.Helpers;
+using MarsQA_1.SpecflowPages.Utils;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -11,23 +12,28 @@ using System.Threading.Tasks;
 
 namespace MarsQA_1.SpecflowPages.Pages
 {
-    public class Language : Driver
-    {
+    public class Language 
+    {               
+        private static IWebElement AddButton => Driver.driver.FindElement(By.XPath("//div[@class='ui bottom attached tab segment active tooltip-target']//div[contains(@class,'ui teal button')][normalize-space()='Add New']"));
+        private static IWebElement AddLanguage => Driver.driver.FindElement(By.XPath("//input[@placeholder='Add Language']"));
+        private static IWebElement AddLevel => Driver.driver.FindElement(By.XPath("//select[@name='level']"));
+        private static IWebElement AddLanguageButton => Driver.driver.FindElement(By.XPath("//input[@value='Add']"));
+        private static IWebElement EditLanguageButton =>Driver.driver.FindElement(By.XPath("/html[1]/body[1]/div[1]/div[1]/section[2]/div[1]/div[1]/div[1]/div[3]/form[1]/div[2]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[3]/span[1]/i[1]"));
+        private static IWebElement UpdateLanguageButton => Driver.driver.FindElement(By.XPath("//input[@value='Update']"));
+       private static IWebElement DeleteLanguageButton =>Driver.driver.FindElement(By.XPath("/html[1]/body[1]/div[1]/div[1]/section[2]/div[1]/div[1]/div[1]/div[3]/form[1]/div[2]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[3]/span[2]/i[1]"));
+
 
         //Click on Languages Add New button
 
         public static void ClickOnAddNewButtonInLanguagesTab()
         {
-            IWebElement AddButton = driver.FindElement(By.XPath("//div[@class='ui bottom attached tab segment active tooltip-target']//div[contains(@class,'ui teal button')][normalize-space()='Add New']"));
-            AddButton.Click();
+             AddButton.Click();
 
         }
 
         //Funtion to input a language to the language text box
         public static void AddInTextbox(string language)
-        {
-
-            IWebElement AddLanguage = driver.FindElement(By.XPath("//input[@placeholder='Add Language']"));
+        {           
             AddLanguage.SendKeys(language);
         }
 
@@ -36,10 +42,8 @@ namespace MarsQA_1.SpecflowPages.Pages
 
         public static void ChooseALevelForLanguageFromDropdownList(string Level)
         {
-            IWebElement AddLevel = driver.FindElement(By.XPath("//select[@name='level']"));
             AddLevel.Click();
-            driver.FindElement(By.XPath("//select[@name='level']")).SendKeys(Level);
-
+            AddLevel.SendKeys(Level);
 
         }
 
@@ -47,16 +51,17 @@ namespace MarsQA_1.SpecflowPages.Pages
 
         public static void ClickOnAddButton()
         {
-            IWebElement AddLanguageButton = driver.FindElement(By.XPath("//input[@value='Add']"));
+            
             AddLanguageButton.Click();
         }
 
         public static void LanguageShouldBeAddedToMyProfile()
         {
-            Thread.Sleep(1500);
+            Wait.WaitForWebElement(Driver.driver, "//div[@class='ns-box-inner']","XPath", 20);
+            
             String target_xpath = "//div[@class='ns-box-inner']";
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
 
+            WebDriverWait wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(15));
             IWebElement message = wait.Until(ExpectedConditions.ElementExists(By.XPath(target_xpath)));
 
             String message1 = message.Text;
@@ -69,40 +74,38 @@ namespace MarsQA_1.SpecflowPages.Pages
         // Click on Edit button
         public static void ClickOnEditButtonNextToLanguageIWantToEdit()
         {
-
-            IWebElement EditLanguageButton = driver.FindElement(By.XPath("/html[1]/body[1]/div[1]/div[1]/section[2]/div[1]/div[1]/div[1]/div[3]/form[1]/div[2]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[3]/span[1]/i[1]"));
+            
             EditLanguageButton.Click();
         }
 
         // Input new values
         public static void ReplaceOldInputInTextboxWithNewLanguage()
         {
-
-            IWebElement EditLanguage = driver.FindElement(By.XPath("//input[@placeholder='Add Language']"));
-            EditLanguage.Clear();
-            EditLanguage.SendKeys("Italian");
+                       
+            AddLanguage.Clear();
+            AddLanguage.SendKeys("Italian");
         }
 
         public static void GivenIReplaceOldInputInDropdownListWithNewLevel()
 
         {
-            IWebElement AddLevel = driver.FindElement(By.XPath("//select[@name='level']"));
             AddLevel.Click();
-            driver.FindElement(By.XPath("//select[@name='level']")).SendKeys("Basic");
+            AddLevel.SendKeys("Basic");
         }
 
         // Click on Update Button
         public static void ClickOnUpdateButton()
         {
-            IWebElement UpdateLanguageButton = driver.FindElement(By.XPath("//input[@value='Update']"));
+           
             UpdateLanguageButton.Click();
         }
         // Validate Updated language
         public static void LanguageShouldBeUpdated()
         {
-            Thread.Sleep(1500);
+            Wait.WaitForWebElement(Driver.driver, "//div[@class='ns-box-inner']", "XPath", 20);
+
             String target_xpath = "//div[@class='ns-box-inner']";
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(15));
 
             IWebElement message = wait.Until(ExpectedConditions.ElementExists(By.XPath(target_xpath)));
 
@@ -116,16 +119,17 @@ namespace MarsQA_1.SpecflowPages.Pages
 
         public static void ClickOnCrossSignNextToTheLanguageIWantToDelete()
         {
-            IWebElement DeleteLanguageButton = driver.FindElement(By.XPath("/html[1]/body[1]/div[1]/div[1]/section[2]/div[1]/div[1]/div[1]/div[3]/form[1]/div[2]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[3]/span[2]/i[1]"));
+            
             DeleteLanguageButton.Click();
         }
 
         // Validate Deletion
         public static void LanguageShouldBeDeleted()
         {
-            Thread.Sleep(1500);
+            Wait.WaitForWebElement(Driver.driver, "//div[@class='ns-box-inner']", "XPath", 20);
+
             String target_xpath = "//div[@class='ns-box-inner']";
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(15));
 
             IWebElement message = wait.Until(ExpectedConditions.ElementExists(By.XPath(target_xpath)));
 

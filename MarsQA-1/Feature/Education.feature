@@ -3,7 +3,8 @@
 
 @mytag
 Scenario Outline: 1 Add educational details in profile
-    Given I am on Profile page
+    Given I login to the website  
+	Given I am on Profile page
 	And I click on Education Tab
 	And I click on Add New Button to add education
 	And I  pass < College > in textbox
@@ -20,7 +21,8 @@ Scenario Outline: 1 Add educational details in profile
 
 	@tag4
 	Scenario: 2 Edit educational details in profile
-    Given I am on Profile page
+   Given I login to the website  
+   Given I am on Profile page
 	And I click on Education Tab
 	And I click on Edit Button next to Educational details I want to edit
 	And I provide new College/University Name in textbox
@@ -33,7 +35,8 @@ Scenario Outline: 1 Add educational details in profile
 
 	@tag5
 	Scenario: 3 Delete educational details in profile
-    Given I am on Profile page
+    Given I login to the website  
+	Given I am on Profile page
 	And I click on Education Tab
 	When I click on cross sign next to the educational details I want to delete
 	Then the educational details should be deleted

@@ -29,19 +29,7 @@ namespace MarsQA_1.Utils
         public void TearDown()
         {
 
-            // Screenshot
-            // string img = SaveScreenShotClass.SaveScreenshot(Driver.driver, "Report");
-            // test.Log(LogStatus.Info, "Snapshot below: " + test.AddScreenCapture(img));
-            //Close the browser
-            // Close();
-
-            // end test. (Reports)
-            // CommonMethods.Extent.EndTest(test);
-
-            // calling Flush writes everything to the log file (Reports)
-            // CommonMethods.Extent.Flush();
-
-           // driver.Quit();
+             driver.Quit();
 
         }
     }

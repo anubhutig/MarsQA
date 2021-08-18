@@ -1,4 +1,5 @@
 ﻿using MarsQA_1.Helpers;
+using MarsQA_1.SpecflowPages.Utils;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -11,58 +12,69 @@ using System.Threading.Tasks;
 
 namespace MarsQA_1.SpecflowPages.Pages
 {
-    class Certificate : Driver
+    class Certificate 
     {
+        
+        private static IWebElement CertificationsButton =>Driver.driver.FindElement(By.XPath("//a[normalize-space()='Certifications']"));
+        private static IWebElement AddNewButton =>Driver.driver.FindElement(By.XPath("//div[@class='ui bottom attached tab segment tooltip-target active']//div[contains(@class,'ui teal button')][normalize-space()='Add New']"));
+        private static IWebElement AddCertificate =>Driver.driver.FindElement(By.XPath("//input[@placeholder='Certificate or Award']"));
+        private static IWebElement AddCertifier =>Driver.driver.FindElement(By.XPath("//input[@placeholder='Certified From (e.g. Adobe)']"));
+        private static IWebElement AddYear =>Driver.driver.FindElement(By.XPath("//select[@name='certificationYear']"));
+        private static IWebElement AddButton1 =>Driver.driver.FindElement(By.XPath("//input[@value='Add']"));
+        private static IWebElement EditButton1 =>Driver.driver.FindElement(By.XPath("//tbody/tr/td[4]/span[1]/i[1]"));
+        private static IWebElement UpdateButton1 =>Driver.driver.FindElement(By.XPath("//input[@value='Update']"));
+        private static IWebElement DeleteButton1 =>Driver.driver.FindElement(By.XPath("//tbody[1]/tr[1]/td[4]/span[2]/i[1]"));
+       
         // Adding Certificate 
         public static void ClickOnCertificatesTab()
         {
-            IWebElement CertificationsButton = driver.FindElement(By.XPath("//a[normalize-space()='Certifications']"));
+            
             CertificationsButton.Click();
 
         }
                 
         public static void ClickOnAddNewButton()
         {
-            IWebElement AddNewButton = driver.FindElement(By.XPath("//div[@class='ui bottom attached tab segment tooltip-target active']//div[contains(@class,'ui teal button')][normalize-space()='Add New']"));
+           
             AddNewButton.Click();
 
         }
 
         public static void InputInTextbox(string Award)
         {
-            IWebElement AddCertificate = driver.FindElement(By.XPath("//input[@placeholder='Certificate or Award']"));
+            
             AddCertificate.SendKeys(Award);
 
         }
 
         public static void TypeInBox(string Certifier)
         {
-            IWebElement AddCertifier = driver.FindElement(By.XPath("//input[@placeholder='Certified From (e.g. Adobe)']"));
+            
             AddCertifier.SendKeys(Certifier);
 
         }
 
         public static void SelectFromDropdownList(string Year)
         {
-            IWebElement AddYear = driver.FindElement(By.XPath("//select[@name='certificationYear']"));
+            
             AddYear.Click();
-            driver.FindElement(By.XPath("//select[@name='certificationYear']"));
             AddYear.SendKeys(Year);
 
         }
 
         public static void ClickOnAddButtonToAddCertificate()
         {
-            IWebElement AddButton1 = driver.FindElement(By.XPath("//input[@value='Add']"));
+            
             AddButton1.Click();
 
         }
 
         public static void CertificateDetailsShouldBeAdded()
         {
-            Thread.Sleep(1500);
+            Wait.WaitForWebElement(Driver.driver, "//div[@class='ns-box-inner']", "XPath", 20);
+
             String target_xpath = "//div[@class='ns-box-inner']";
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(20));
 
             IWebElement message = wait.Until(ExpectedConditions.ElementExists(By.XPath(target_xpath)));
                         
@@ -76,25 +88,25 @@ namespace MarsQA_1.SpecflowPages.Pages
         // Edit Certificate Details
         public static void ClickOnEditButtonNextToCertificateDetailsIWantToEdit()
         {
-            IWebElement EditButton1 = driver.FindElement(By.XPath("//tbody/tr/td[4]/span[1]/i[1]"));
+            
             EditButton1.Click();
 
         }
 
         public static void UpdateNewCertificatesOrAwardInTextbox()
         {
-            IWebElement InputEditCertificate = driver.FindElement(By.XPath("//input[@placeholder='Certificate or Award']"));
-            InputEditCertificate.Clear();
-            InputEditCertificate.SendKeys("ISTQB Foundation");
+            
+            AddCertificate.Clear();
+            AddCertificate.SendKeys("ISTQB Foundation");
 
         }
 
         
         public static void UpdateNewCertifierSNameInTextbox()
         {
-            IWebElement InputEditCertifier = driver.FindElement(By.XPath("//input[@placeholder='Certified From (e.g. Adobe)']"));
-            InputEditCertifier.Clear();
-            InputEditCertifier.SendKeys("ISTQB Assosiation");
+            
+            AddCertifier.Clear();
+            AddCertifier.SendKeys("ISTQB Assosiation");
 
 
 
@@ -102,15 +114,14 @@ namespace MarsQA_1.SpecflowPages.Pages
 
         public static void UpdateNewYearFromDropdownList()
         {
-            IWebElement AddYear = driver.FindElement(By.XPath("//select[@name='certificationYear']"));
+            
             AddYear.Click();
-            driver.FindElement(By.XPath("//select[@name='certificationYear']"));
             AddYear.SendKeys("2021");
         }
 
         public static void ClickOnUpdateButtonToUpdateCertificate()
         {
-            IWebElement UpdateButton1 = driver.FindElement(By.XPath("//input[@value='Update']"));
+           
             UpdateButton1.Click();
 
         }
@@ -118,9 +129,10 @@ namespace MarsQA_1.SpecflowPages.Pages
                 
         public static void CertificateDetailsShouldBeUpdated()
         {
-            Thread.Sleep(1500);
+            Wait.WaitForWebElement(Driver.driver, "//div[@class='ns-box-inner']", "XPath", 20);
+
             String target_xpath = "//div[@class='ns-box-inner']";
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(20));
 
             IWebElement message = wait.Until(ExpectedConditions.ElementExists(By.XPath(target_xpath)));
                        
@@ -134,7 +146,7 @@ namespace MarsQA_1.SpecflowPages.Pages
        // Delete Certificate
         public static void ClickOnDeleteButtonNextToCertificateDetailsIWantToDelete()
         {
-            IWebElement DeleteButton1 = driver.FindElement(By.XPath("//tbody[1]/tr[1]/td[4]/span[2]/i[1]"));
+            
             DeleteButton1.Click();
 
         }
@@ -142,9 +154,10 @@ namespace MarsQA_1.SpecflowPages.Pages
        // Validate Deletion
         public static void CertificateDetailsShouldBeDeleted()
         {
-            Thread.Sleep(1500);
+            Wait.WaitForWebElement(Driver.driver, "//div[@class='ns-box-inner']", "XPath", 20);
+
             String target_xpath = "//div[@class='ns-box-inner']";
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(20));
 
             IWebElement message = wait.Until(ExpectedConditions.ElementExists(By.XPath(target_xpath)));
 

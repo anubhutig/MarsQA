@@ -3,6 +3,7 @@
 
 @mytaga
 Scenario Outline: 1 Add certificates or awards to my profile
+	Given I login to the website  
 	Given I am on Profile page
 	And I click on Certificates Tab
 	And I click on Add New Button
@@ -18,6 +19,7 @@ Scenario Outline: 1 Add certificates or awards to my profile
 	| Test Analyst | Industry Connect | 2012 |
 
 Scenario: 2 Edit certificates or awards to my profile
+    Given I login to the website  
 	Given I am on Profile page
 	And I click on Certificates Tab
 	And I click on Edit Button next to Certificate details I want to edit
@@ -28,6 +30,7 @@ Scenario: 2 Edit certificates or awards to my profile
 	Then My certificate details should be updated
 
 	Scenario: 3 Delete certificates or awards to my profile
+	Given I login to the website  
 	Given I am on Profile page
 	And I click on Certificates Tab
 	When I click on Delete Button next to Certificate details I want to delete
